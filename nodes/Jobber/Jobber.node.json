@@ -1,0 +1,17 @@
+{
+	"node": "n8n-nodes-base.jobber",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Sales"],
+	"resources": {
+		"primaryDocumentation": [
+			{
+				"url": "https://developer.getjobber.com/docs/"
+			}
+		]
+	},
+	"alias": ["field service", "FSM", "scheduling", "CRM"],
+	"subcategories": {
+		"Sales": ["CRM"]
+	}
+}

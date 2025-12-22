@@ -1,0 +1,17 @@
+{
+	"node": "n8n-nodes-base.jobberTrigger",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Sales"],
+	"resources": {
+		"primaryDocumentation": [
+			{
+				"url": "https://developer.getjobber.com/docs/using_jobbers_api/setting_up_webhooks/"
+			}
+		]
+	},
+	"alias": ["field service", "FSM", "scheduling", "webhook"],
+	"subcategories": {
+		"Sales": ["CRM"]
+	}
+}
