@@ -50,9 +50,17 @@ export async function executeRequestOperation(
 			}
 		`;
 
-		const variables: IDataObject = {};
+		const filter: IDataObject = {};
 		if (filters.status) {
-			variables.filter = { status: filters.status };
+			filter.status = filters.status;
+		}
+		if (filters.clientId) {
+			filter.clientId = filters.clientId;
+		}
+
+		const variables: IDataObject = {};
+		if (Object.keys(filter).length > 0) {
+			variables.filter = filter;
 		}
 
 		responseData = await jobberApiRequestAllItems.call(
@@ -61,6 +69,41 @@ export async function executeRequestOperation(
 			'requests',
 			limit,
 		);
+
+	} else if (operation === 'createNote') {
+		const requestId = this.getNodeParameter('requestId', itemIndex) as string;
+		const message = this.getNodeParameter('message', itemIndex) as string;
+
+		const query = `
+			mutation RequestCreateNote($requestId: EncodedId!, $input: RequestCreateNoteInput!) {
+				requestCreateNote(requestId: $requestId, input: $input) {
+					requestNote {
+						id
+						message
+						createdAt
+					}
+					userErrors {
+						message
+						path
+					}
+				}
+			}
+		`;
+
+		const response = await jobberApiRequest.call(this, {
+			query,
+			variables: { requestId, input: { message } },
+		});
+
+		const result = response.requestCreateNote as IDataObject;
+		if (result.userErrors && (result.userErrors as IDataObject[]).length > 0) {
+			const errors = (result.userErrors as Array<{ message: string }>)
+				.map(e => e.message)
+				.join(', ');
+			throw new Error(`Failed to create note: ${errors}`);
+		}
+
+		responseData = result.requestNote as IDataObject;
 
 	} else if (operation === 'create') {
 		const title = this.getNodeParameter('title', itemIndex) as string;

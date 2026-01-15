@@ -18,6 +18,12 @@ export const requestOperations: INodeProperties = {
 			action: 'Create a request',
 		},
 		{
+			name: 'Create Note',
+			value: 'createNote',
+			description: 'Add a note to an existing request',
+			action: 'Create a note on a request',
+		},
+		{
 			name: 'Delete',
 			value: 'delete',
 			description: 'Delete a request',
@@ -111,6 +117,13 @@ export const requestFields: INodeProperties[] = [
 		},
 		options: [
 			{
+				displayName: 'Client ID',
+				name: 'clientId',
+				type: 'string',
+				default: '',
+				description: 'Filter requests by client ID',
+			},
+			{
 				displayName: 'Status',
 				name: 'status',
 				type: 'options',
@@ -124,6 +137,41 @@ export const requestFields: INodeProperties[] = [
 				description: 'Filter requests by status',
 			},
 		],
+	},
+
+	// ----------------------------------
+	//         request: createNote
+	// ----------------------------------
+	{
+		displayName: 'Request ID',
+		name: 'requestId',
+		type: 'string',
+		required: true,
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['request'],
+				operation: ['createNote'],
+			},
+		},
+		description: 'The ID of the request to add a note to',
+	},
+	{
+		displayName: 'Message',
+		name: 'message',
+		type: 'string',
+		typeOptions: {
+			rows: 4,
+		},
+		required: true,
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['request'],
+				operation: ['createNote'],
+			},
+		},
+		description: 'The content of the note',
 	},
 
 	// ----------------------------------
