@@ -1,6 +1,6 @@
 {
   "name": "@arisegroup/n8n-nodes-jobber",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "n8n community node for Jobber - field service management API integration",
   "keywords": [
     "n8n-community-node-package",

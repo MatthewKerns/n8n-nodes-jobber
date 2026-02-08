@@ -49,7 +49,7 @@ export class JobberTool implements INodeType {
 				displayName: 'Description',
 				name: 'description',
 				type: 'string',
-				default: 'Query Jobber CRM for clients, jobs, quotes, and invoices using GraphQL. Provide a GraphQL query string. Common queries: search clients by name, get job/quote/invoice by ID, list recent jobs.',
+				default: 'Query Jobber CRM for clients, jobs, quotes, and invoices using GraphQL. IMPORTANT: Object fields (phones, emails, addresses) MUST include sub-fields using curly braces, e.g., phones { number } not just phones. Example: query { clients(first: 10) { nodes { id name phones { number } emails { address } } } }',
 				description:
 					'Used by the AI to understand when to call this tool',
 				typeOptions: {
@@ -65,11 +65,12 @@ export class JobberTool implements INodeType {
     nodes {
       id
       name
-      phones
+      phones { number description primary }
+      emails { address primary }
     }
   }
 }`,
-				description: 'The GraphQL query to execute',
+				description: 'GraphQL query to execute. Object fields like phones, emails, addresses must include sub-fields: phones { number } not just phones. Common patterns: clients { nodes { id name phones { number } } }, jobs(clientId: "123") { nodes { id title } }',
 				typeOptions: {
 					rows: 10,
 				},
