@@ -4,17 +4,18 @@ import type {
 	INodeType,
 	INodeTypeDescription,
 } from 'n8n-workflow';
+import { ApplicationError } from 'n8n-workflow';
 
-export class JobberTool implements INodeType {
+export class JobberWriteTool implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'Jobber Tool',
-		name: 'jobberTool',
+		displayName: 'Jobber Write Tool',
+		name: 'jobberWriteTool',
 		icon: 'file:jobber.svg',
 		group: ['transform'],
 		version: 1,
-		description: 'AI Tool for querying Jobber CRM (clients, jobs, quotes, invoices)',
+		description: 'AI Tool for creating/updating/deleting data in Jobber CRM using GraphQL mutations',
 		defaults: {
-			name: 'Jobber Tool',
+			name: 'Jobber Write Tool',
 		},
 		codex: {
 			categories: ['AI'],
@@ -43,14 +44,14 @@ export class JobberTool implements INodeType {
 				displayName: 'Name',
 				name: 'name',
 				type: 'string',
-				default: 'jobber_query',
+				default: 'jobber_write',
 				description: 'The name of the function to be called, could contain underscores',
 			},
 			{
 				displayName: 'Description',
 				name: 'description',
 				type: 'string',
-				default: 'Query Jobber CRM for clients, jobs, quotes, and invoices using GraphQL. IMPORTANT: Object fields (phones, emails, addresses) MUST include sub-fields using curly braces, e.g., phones { number } not just phones. Example: query { clients(first: 10) { nodes { id name phones { number } emails { address } } } }',
+				default: 'Create, update, or delete data in Jobber CRM using GraphQL mutations. Operations: clientCreate, clientUpdate, jobCreate, quoteCreate, invoiceCreate, etc. IMPORTANT: This tool MODIFIES data - use with caution. Always confirm with user before executing writes.',
 				description:
 					'Used by the AI to understand when to call this tool',
 				typeOptions: {
@@ -58,22 +59,27 @@ export class JobberTool implements INodeType {
 				},
 			},
 			{
-				displayName: 'GraphQL Query',
-				name: 'query',
+				displayName: 'GraphQL Mutation',
+				name: 'mutation',
 				type: 'string',
-				default: `query {
-  clients(first: 10) {
-    nodes {
+				default: `mutation {
+  clientCreate(input: {
+    firstName: "John"
+    lastName: "Doe"
+    phones: [{number: "555-1234", primary: true}]
+    emails: [{address: "john@example.com", primary: true}]
+  }) {
+    client {
       id
       name
-      phones { number description primary }
-      emails { address primary }
+      phones { number }
+      emails { address }
     }
   }
 }`,
-				description: 'GraphQL query to execute. Object fields like phones, emails, addresses must include sub-fields: phones { number } not just phones. Common patterns: clients { nodes { id name phones { number } } }, jobs(clientId: "123") { nodes { id title } }',
+				description: 'GraphQL mutation to execute. Common mutations: clientCreate, clientUpdate, jobCreate, quoteCreate, invoiceCreate. Always include return fields to confirm the operation succeeded.',
 				typeOptions: {
-					rows: 10,
+					rows: 15,
 				},
 			},
 		],
@@ -85,7 +91,16 @@ export class JobberTool implements INodeType {
 
 		for (let i = 0; i < items.length; i++) {
 			try {
-				const query = this.getNodeParameter('query', i) as string;
+				// For AI Tool: read from incoming JSON data (from AI agent)
+				// For manual execution: fall back to node parameters
+				const inputData = items[i].json;
+				const mutation = (inputData.mutation as string) || (this.getNodeParameter('mutation', i) as string);
+
+				// Validate that this is actually a mutation (safety check)
+				const trimmedMutation = String(mutation).trim().toLowerCase();
+				if (!trimmedMutation.startsWith('mutation')) {
+					throw new ApplicationError('JobberWriteTool only accepts GraphQL mutations (not queries). Use JobberTool for read operations.');
+				}
 
 				const response = await this.helpers.httpRequestWithAuthentication.call(
 					this,
@@ -98,7 +113,7 @@ export class JobberTool implements INodeType {
 							'X-JOBBER-GRAPHQL-VERSION': '2025-04-16',
 						},
 						body: {
-							query,
+							query: mutation,
 						},
 					},
 				);

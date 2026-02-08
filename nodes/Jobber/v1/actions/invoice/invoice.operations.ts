@@ -11,18 +11,31 @@ export const invoiceOperations: INodeProperties = {
 		},
 	},
 	options: [
-		{
-			name: 'Create',
-			value: 'create',
-			description: 'Create a new invoice',
-			action: 'Create an invoice',
-		},
-		{
-			name: 'Delete',
-			value: 'delete',
-			description: 'Delete an invoice',
-			action: 'Delete an invoice',
-		},
+		// Write operations commented out - read-only mode
+
+		// {
+
+		// name: 'Create',
+
+		// value: 'create',
+
+		// description: 'Create a new invoice',
+
+		// action: 'Create an invoice',
+
+		// },
+
+		// {
+
+		// name: 'Delete',
+
+		// value: 'delete',
+
+		// description: 'Delete an invoice',
+
+		// action: 'Delete an invoice',
+
+		// },
 		{
 			name: 'Get',
 			value: 'get',
@@ -35,12 +48,18 @@ export const invoiceOperations: INodeProperties = {
 			description: 'Get multiple invoices',
 			action: 'Get many invoices',
 		},
-		{
-			name: 'Update',
-			value: 'update',
-			description: 'Update an invoice',
-			action: 'Update an invoice',
-		},
+
+		// {
+
+		// name: 'Update',
+
+		// value: 'update',
+
+		// description: 'Update an invoice',
+
+		// action: 'Update an invoice',
+
+		// },
 	],
 	default: 'getMany',
 };
@@ -58,7 +77,7 @@ export const invoiceFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['invoice'],
-				operation: ['get', 'update', 'delete'],
+				operation: ['get'] // Removed 'update', 'delete' - read-only mode,
 			},
 		},
 		description: 'The ID of the invoice',
@@ -110,6 +129,7 @@ export const invoiceFields: INodeProperties[] = [
 			},
 		},
 		options: [
+		// Write operations commented out - read-only mode
 			{
 				displayName: 'Search Term',
 				name: 'searchTerm',
@@ -123,6 +143,7 @@ export const invoiceFields: INodeProperties[] = [
 				type: 'options',
 				default: '',
 				options: [
+		// Write operations commented out - read-only mode
 					{ name: 'All', value: '' },
 					{ name: 'Draft', value: 'DRAFT' },
 					{ name: 'Awaiting Payment', value: 'AWAITING_PAYMENT' },
@@ -143,109 +164,317 @@ export const invoiceFields: INodeProperties[] = [
 	},
 
 	// ----------------------------------
-	//         invoice: create
-	// ----------------------------------
-	{
-		displayName: 'Client ID',
-		name: 'clientId',
-		type: 'string',
-		required: true,
-		default: '',
-		displayOptions: {
-			show: {
-				resource: ['invoice'],
-				operation: ['create'],
-			},
-		},
-		description: 'The ID of the client for this invoice',
-	},
-	{
-		displayName: 'Additional Fields',
-		name: 'additionalFields',
-		type: 'collection',
-		placeholder: 'Add Field',
-		default: {},
-		displayOptions: {
-			show: {
-				resource: ['invoice'],
-				operation: ['create'],
-			},
-		},
-		options: [
-			{
-				displayName: 'Subject',
-				name: 'subject',
-				type: 'string',
-				default: '',
-				description: 'Subject of the invoice',
-			},
-			{
-				displayName: 'Message',
-				name: 'message',
-				type: 'string',
-				typeOptions: {
-					rows: 4,
-				},
-				default: '',
-				description: 'Message/notes for the invoice',
-			},
-			{
-				displayName: 'Due Date',
-				name: 'dueDate',
-				type: 'dateTime',
-				default: '',
-				description: 'When the invoice is due',
-			},
-			{
-				displayName: 'Job ID',
-				name: 'jobId',
-				type: 'string',
-				default: '',
-				description: 'Link this invoice to a job',
-			},
-		],
-	},
+
+
+	//         invoice: create (COMMENTED OUT - READ-ONLY MODE)
+
 
 	// ----------------------------------
-	//         invoice: update
+
+
+	// 	{
+
+
+	// 		displayName: 'Client ID',
+
+
+	// 		name: 'clientId',
+
+
+	// 		type: 'string',
+
+
+	// 		required: true,
+
+
+	// 		default: '',
+
+
+	// 		displayOptions: {
+
+
+	// 			show: {
+
+
+	// 				resource: ['invoice'],
+
+
+	// 				operation: ['create'],
+
+
+	// 			},
+
+
+	// 		},
+
+
+	// 		description: 'The ID of the client for this invoice',
+
+
+	// 	},
+
+
+	// 	{
+
+
+	// 		displayName: 'Additional Fields',
+
+
+	// 		name: 'additionalFields',
+
+
+	// 		type: 'collection',
+
+
+	// 		placeholder: 'Add Field',
+
+
+	// 		default: {},
+
+
+	// 		displayOptions: {
+
+
+	// 			show: {
+
+
+	// 				resource: ['invoice'],
+
+
+	// 				operation: ['create'],
+
+
+	// 			},
+
+
+	// 		},
+
+
+	// 		options: [
+		// Write operations commented out - read-only mode
+
+
+	// 			{
+
+
+	// 				displayName: 'Subject',
+
+
+	// 				name: 'subject',
+
+
+	// 				type: 'string',
+
+
+	// 				default: '',
+
+
+	// 				description: 'Subject of the invoice',
+
+
+	// 			},
+
+
+	// 			{
+
+
+	// 				displayName: 'Message',
+
+
+	// 				name: 'message',
+
+
+	// 				type: 'string',
+
+
+	// 				typeOptions: {
+
+
+	// 					rows: 4,
+
+
+	// 				},
+
+
+	// 				default: '',
+
+
+	// 				description: 'Message/notes for the invoice',
+
+
+	// 			},
+
+
+	// 			{
+
+
+	// 				displayName: 'Due Date',
+
+
+	// 				name: 'dueDate',
+
+
+	// 				type: 'dateTime',
+
+
+	// 				default: '',
+
+
+	// 				description: 'When the invoice is due',
+
+
+	// 			},
+
+
+	// 			{
+
+
+	// 				displayName: 'Job ID',
+
+
+	// 				name: 'jobId',
+
+
+	// 				type: 'string',
+
+
+	// 				default: '',
+
+
+	// 				description: 'Link this invoice to a job',
+
+
+	// 			},
+
+
+	// 		],
+
+
+	// 	},
+
 	// ----------------------------------
-	{
-		displayName: 'Update Fields',
-		name: 'updateFields',
-		type: 'collection',
-		placeholder: 'Add Field',
-		default: {},
-		displayOptions: {
-			show: {
-				resource: ['invoice'],
-				operation: ['update'],
-			},
-		},
-		options: [
-			{
-				displayName: 'Subject',
-				name: 'subject',
-				type: 'string',
-				default: '',
-				description: 'Subject of the invoice',
-			},
-			{
-				displayName: 'Message',
-				name: 'message',
-				type: 'string',
-				typeOptions: {
-					rows: 4,
-				},
-				default: '',
-				description: 'Message/notes for the invoice',
-			},
-			{
-				displayName: 'Due Date',
-				name: 'dueDate',
-				type: 'dateTime',
-				default: '',
-				description: 'When the invoice is due',
-			},
-		],
-	},
+
+
+	//         invoice: update (COMMENTED OUT - READ-ONLY MODE)
+
+
+	// ----------------------------------
+
+
+	// 	{
+
+
+	// 		displayName: 'Update Fields',
+
+
+	// 		name: 'updateFields',
+
+
+	// 		type: 'collection',
+
+
+	// 		placeholder: 'Add Field',
+
+
+	// 		default: {},
+
+
+	// 		displayOptions: {
+
+
+	// 			show: {
+
+
+	// 				resource: ['invoice'],
+
+
+	// 				operation: ['update'],
+
+
+	// 			},
+
+
+	// 		},
+
+
+	// 		options: [
+		// Write operations commented out - read-only mode
+
+
+	// 			{
+
+
+	// 				displayName: 'Subject',
+
+
+	// 				name: 'subject',
+
+
+	// 				type: 'string',
+
+
+	// 				default: '',
+
+
+	// 				description: 'Subject of the invoice',
+
+
+	// 			},
+
+
+	// 			{
+
+
+	// 				displayName: 'Message',
+
+
+	// 				name: 'message',
+
+
+	// 				type: 'string',
+
+
+	// 				typeOptions: {
+
+
+	// 					rows: 4,
+
+
+	// 				},
+
+
+	// 				default: '',
+
+
+	// 				description: 'Message/notes for the invoice',
+
+
+	// 			},
+
+
+	// 			{
+
+
+	// 				displayName: 'Due Date',
+
+
+	// 				name: 'dueDate',
+
+
+	// 				type: 'dateTime',
+
+
+	// 				default: '',
+
+
+	// 				description: 'When the invoice is due',
+
+
+	// 			},
+
+
+	// 		],
+
+
+	// 	},
 ];

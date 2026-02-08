@@ -63,6 +63,8 @@ export async function executeInvoiceOperation(
 		);
 
 	} else if (operation === 'create') {
+throw new Error('Create operation is disabled in read-only mode. Use JobberWriteTool for write operations.');
+
 		const clientId = this.getNodeParameter('clientId', itemIndex) as string;
 		const additionalFields = this.getNodeParameter('additionalFields', itemIndex, {}) as IDataObject;
 
@@ -104,6 +106,8 @@ export async function executeInvoiceOperation(
 		responseData = result.invoice as IDataObject;
 
 	} else if (operation === 'update') {
+throw new Error('Update operation is disabled in read-only mode. Use JobberWriteTool for write operations.');
+
 		const invoiceId = this.getNodeParameter('invoiceId', itemIndex) as string;
 		const updateFields = this.getNodeParameter('updateFields', itemIndex, {}) as IDataObject;
 
@@ -141,6 +145,8 @@ export async function executeInvoiceOperation(
 		responseData = result.invoice as IDataObject;
 
 	} else if (operation === 'delete') {
+throw new Error('Delete operation is disabled in read-only mode. Use JobberWriteTool for write operations.');
+
 		const invoiceId = this.getNodeParameter('invoiceId', itemIndex) as string;
 
 		const query = `

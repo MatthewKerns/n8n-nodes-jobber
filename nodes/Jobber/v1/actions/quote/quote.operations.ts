@@ -11,24 +11,37 @@ export const quoteOperations: INodeProperties = {
 		},
 	},
 	options: [
-		{
-			name: 'Convert to Job',
-			value: 'convertToJob',
-			description: 'Convert a quote to a job',
-			action: 'Convert quote to job',
-		},
-		{
-			name: 'Create',
-			value: 'create',
-			description: 'Create a new quote',
-			action: 'Create a quote',
-		},
-		{
-			name: 'Delete',
-			value: 'delete',
-			description: 'Delete a quote',
-			action: 'Delete a quote',
-		},
+		// Write operations commented out - read-only mode
+		// {
+		// 	name: 'Convert to Job',
+		// 	value: 'convertToJob',
+		// 	description: 'Convert a quote to a job',
+		// 	action: 'Convert quote to job',
+		// },
+
+		// {
+
+		// name: 'Create',
+
+		// value: 'create',
+
+		// description: 'Create a new quote',
+
+		// action: 'Create a quote',
+
+		// },
+
+		// {
+
+		// name: 'Delete',
+
+		// value: 'delete',
+
+		// description: 'Delete a quote',
+
+		// action: 'Delete a quote',
+
+		// },
 		{
 			name: 'Get',
 			value: 'get',
@@ -41,12 +54,18 @@ export const quoteOperations: INodeProperties = {
 			description: 'Get multiple quotes',
 			action: 'Get many quotes',
 		},
-		{
-			name: 'Update',
-			value: 'update',
-			description: 'Update a quote',
-			action: 'Update a quote',
-		},
+
+		// {
+
+		// name: 'Update',
+
+		// value: 'update',
+
+		// description: 'Update a quote',
+
+		// action: 'Update a quote',
+
+		// },
 	],
 	default: 'getMany',
 };
@@ -64,7 +83,7 @@ export const quoteFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['quote'],
-				operation: ['get', 'update', 'delete', 'convertToJob'],
+				operation: ['get'] // Removed 'update', 'delete' - read-only mode,
 			},
 		},
 		description: 'The ID of the quote',
@@ -116,6 +135,7 @@ export const quoteFields: INodeProperties[] = [
 			},
 		},
 		options: [
+		// Write operations commented out - read-only mode
 			{
 				displayName: 'Search Term',
 				name: 'searchTerm',
@@ -129,6 +149,7 @@ export const quoteFields: INodeProperties[] = [
 				type: 'options',
 				default: '',
 				options: [
+		// Write operations commented out - read-only mode
 					{ name: 'All', value: '' },
 					{ name: 'Draft', value: 'DRAFT' },
 					{ name: 'Awaiting Response', value: 'AWAITING_RESPONSE' },
@@ -149,101 +170,293 @@ export const quoteFields: INodeProperties[] = [
 	},
 
 	// ----------------------------------
-	//         quote: create
-	// ----------------------------------
-	{
-		displayName: 'Client ID',
-		name: 'clientId',
-		type: 'string',
-		required: true,
-		default: '',
-		displayOptions: {
-			show: {
-				resource: ['quote'],
-				operation: ['create'],
-			},
-		},
-		description: 'The ID of the client for this quote',
-	},
-	{
-		displayName: 'Title',
-		name: 'title',
-		type: 'string',
-		default: '',
-		displayOptions: {
-			show: {
-				resource: ['quote'],
-				operation: ['create'],
-			},
-		},
-		description: 'Title of the quote',
-	},
-	{
-		displayName: 'Additional Fields',
-		name: 'additionalFields',
-		type: 'collection',
-		placeholder: 'Add Field',
-		default: {},
-		displayOptions: {
-			show: {
-				resource: ['quote'],
-				operation: ['create'],
-			},
-		},
-		options: [
-			{
-				displayName: 'Message',
-				name: 'message',
-				type: 'string',
-				typeOptions: {
-					rows: 4,
-				},
-				default: '',
-				description: 'Message/notes for the quote',
-			},
-			{
-				displayName: 'Property ID',
-				name: 'propertyId',
-				type: 'string',
-				default: '',
-				description: 'The property ID for this quote',
-			},
-		],
-	},
+
+
+	//         quote: create (COMMENTED OUT - READ-ONLY MODE)
+
 
 	// ----------------------------------
-	//         quote: update
+
+
+	// 	{
+
+
+	// 		displayName: 'Client ID',
+
+
+	// 		name: 'clientId',
+
+
+	// 		type: 'string',
+
+
+	// 		required: true,
+
+
+	// 		default: '',
+
+
+	// 		displayOptions: {
+
+
+	// 			show: {
+
+
+	// 				resource: ['quote'],
+
+
+	// 				operation: ['create'],
+
+
+	// 			},
+
+
+	// 		},
+
+
+	// 		description: 'The ID of the client for this quote',
+
+
+	// 	},
+
+
+	// 	{
+
+
+	// 		displayName: 'Title',
+
+
+	// 		name: 'title',
+
+
+	// 		type: 'string',
+
+
+	// 		default: '',
+
+
+	// 		displayOptions: {
+
+
+	// 			show: {
+
+
+	// 				resource: ['quote'],
+
+
+	// 				operation: ['create'],
+
+
+	// 			},
+
+
+	// 		},
+
+
+	// 		description: 'Title of the quote',
+
+
+	// 	},
+
+
+	// 	{
+
+
+	// 		displayName: 'Additional Fields',
+
+
+	// 		name: 'additionalFields',
+
+
+	// 		type: 'collection',
+
+
+	// 		placeholder: 'Add Field',
+
+
+	// 		default: {},
+
+
+	// 		displayOptions: {
+
+
+	// 			show: {
+
+
+	// 				resource: ['quote'],
+
+
+	// 				operation: ['create'],
+
+
+	// 			},
+
+
+	// 		},
+
+
+	// 		options: [
+		// Write operations commented out - read-only mode
+
+
+	// 			{
+
+
+	// 				displayName: 'Message',
+
+
+	// 				name: 'message',
+
+
+	// 				type: 'string',
+
+
+	// 				typeOptions: {
+
+
+	// 					rows: 4,
+
+
+	// 				},
+
+
+	// 				default: '',
+
+
+	// 				description: 'Message/notes for the quote',
+
+
+	// 			},
+
+
+	// 			{
+
+
+	// 				displayName: 'Property ID',
+
+
+	// 				name: 'propertyId',
+
+
+	// 				type: 'string',
+
+
+	// 				default: '',
+
+
+	// 				description: 'The property ID for this quote',
+
+
+	// 			},
+
+
+	// 		],
+
+
+	// 	},
+
 	// ----------------------------------
-	{
-		displayName: 'Update Fields',
-		name: 'updateFields',
-		type: 'collection',
-		placeholder: 'Add Field',
-		default: {},
-		displayOptions: {
-			show: {
-				resource: ['quote'],
-				operation: ['update'],
-			},
-		},
-		options: [
-			{
-				displayName: 'Title',
-				name: 'title',
-				type: 'string',
-				default: '',
-				description: 'Title of the quote',
-			},
-			{
-				displayName: 'Message',
-				name: 'message',
-				type: 'string',
-				typeOptions: {
-					rows: 4,
-				},
-				default: '',
-				description: 'Message/notes for the quote',
-			},
-		],
-	},
+
+
+	//         quote: update (COMMENTED OUT - READ-ONLY MODE)
+
+
+	// ----------------------------------
+
+
+	// 	{
+
+
+	// 		displayName: 'Update Fields',
+
+
+	// 		name: 'updateFields',
+
+
+	// 		type: 'collection',
+
+
+	// 		placeholder: 'Add Field',
+
+
+	// 		default: {},
+
+
+	// 		displayOptions: {
+
+
+	// 			show: {
+
+
+	// 				resource: ['quote'],
+
+
+	// 				operation: ['update'],
+
+
+	// 			},
+
+
+	// 		},
+
+
+	// 		options: [
+		// Write operations commented out - read-only mode
+
+
+	// 			{
+
+
+	// 				displayName: 'Title',
+
+
+	// 				name: 'title',
+
+
+	// 				type: 'string',
+
+
+	// 				default: '',
+
+
+	// 				description: 'Title of the quote',
+
+
+	// 			},
+
+
+	// 			{
+
+
+	// 				displayName: 'Message',
+
+
+	// 				name: 'message',
+
+
+	// 				type: 'string',
+
+
+	// 				typeOptions: {
+
+
+	// 					rows: 4,
+
+
+	// 				},
+
+
+	// 				default: '',
+
+
+	// 				description: 'Message/notes for the quote',
+
+
+	// 			},
+
+
+	// 		],
+
+
+	// 	},
 ];

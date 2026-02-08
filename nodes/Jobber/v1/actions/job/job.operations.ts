@@ -11,18 +11,31 @@ export const jobOperations: INodeProperties = {
 		},
 	},
 	options: [
-		{
-			name: 'Create',
-			value: 'create',
-			description: 'Create a new job',
-			action: 'Create a job',
-		},
-		{
-			name: 'Delete',
-			value: 'delete',
-			description: 'Delete a job',
-			action: 'Delete a job',
-		},
+		// Write operations commented out - read-only mode
+
+		// {
+
+		// name: 'Create',
+
+		// value: 'create',
+
+		// description: 'Create a new job',
+
+		// action: 'Create a job',
+
+		// },
+
+		// {
+
+		// name: 'Delete',
+
+		// value: 'delete',
+
+		// description: 'Delete a job',
+
+		// action: 'Delete a job',
+
+		// },
 		{
 			name: 'Get',
 			value: 'get',
@@ -35,12 +48,18 @@ export const jobOperations: INodeProperties = {
 			description: 'Get multiple jobs',
 			action: 'Get many jobs',
 		},
-		{
-			name: 'Update',
-			value: 'update',
-			description: 'Update a job',
-			action: 'Update a job',
-		},
+
+		// {
+
+		// name: 'Update',
+
+		// value: 'update',
+
+		// description: 'Update a job',
+
+		// action: 'Update a job',
+
+		// },
 	],
 	default: 'getMany',
 };
@@ -58,7 +77,7 @@ export const jobFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['job'],
-				operation: ['get', 'update', 'delete'],
+				operation: ['get'] // Removed 'update', 'delete' - read-only mode,
 			},
 		},
 		description: 'The ID of the job',
@@ -110,6 +129,7 @@ export const jobFields: INodeProperties[] = [
 			},
 		},
 		options: [
+		// Write operations commented out - read-only mode
 			{
 				displayName: 'Search Term',
 				name: 'searchTerm',
@@ -123,6 +143,7 @@ export const jobFields: INodeProperties[] = [
 				type: 'options',
 				default: '',
 				options: [
+		// Write operations commented out - read-only mode
 					{ name: 'All', value: '' },
 					{ name: 'Requires Invoicing', value: 'REQUIRES_INVOICING' },
 					{ name: 'Active', value: 'ACTIVE' },
@@ -144,129 +165,377 @@ export const jobFields: INodeProperties[] = [
 	},
 
 	// ----------------------------------
-	//         job: create
-	// ----------------------------------
-	{
-		displayName: 'Client ID',
-		name: 'clientId',
-		type: 'string',
-		required: true,
-		default: '',
-		displayOptions: {
-			show: {
-				resource: ['job'],
-				operation: ['create'],
-			},
-		},
-		description: 'The ID of the client for this job',
-	},
-	{
-		displayName: 'Title',
-		name: 'title',
-		type: 'string',
-		default: '',
-		displayOptions: {
-			show: {
-				resource: ['job'],
-				operation: ['create'],
-			},
-		},
-		description: 'Title of the job',
-	},
-	{
-		displayName: 'Additional Fields',
-		name: 'additionalFields',
-		type: 'collection',
-		placeholder: 'Add Field',
-		default: {},
-		displayOptions: {
-			show: {
-				resource: ['job'],
-				operation: ['create'],
-			},
-		},
-		options: [
-			{
-				displayName: 'Instructions',
-				name: 'instructions',
-				type: 'string',
-				typeOptions: {
-					rows: 4,
-				},
-				default: '',
-				description: 'Instructions for the job',
-			},
-			{
-				displayName: 'Start Date',
-				name: 'startAt',
-				type: 'dateTime',
-				default: '',
-				description: 'When the job starts',
-			},
-			{
-				displayName: 'End Date',
-				name: 'endAt',
-				type: 'dateTime',
-				default: '',
-				description: 'When the job ends',
-			},
-			{
-				displayName: 'Property ID',
-				name: 'propertyId',
-				type: 'string',
-				default: '',
-				description: 'The property ID for this job',
-			},
-		],
-	},
+
+
+	//         job: create (COMMENTED OUT - READ-ONLY MODE)
+
 
 	// ----------------------------------
-	//         job: update
+
+
+	// 	{
+
+
+	// 		displayName: 'Client ID',
+
+
+	// 		name: 'clientId',
+
+
+	// 		type: 'string',
+
+
+	// 		required: true,
+
+
+	// 		default: '',
+
+
+	// 		displayOptions: {
+
+
+	// 			show: {
+
+
+	// 				resource: ['job'],
+
+
+	// 				operation: ['create'],
+
+
+	// 			},
+
+
+	// 		},
+
+
+	// 		description: 'The ID of the client for this job',
+
+
+	// 	},
+
+
+	// 	{
+
+
+	// 		displayName: 'Title',
+
+
+	// 		name: 'title',
+
+
+	// 		type: 'string',
+
+
+	// 		default: '',
+
+
+	// 		displayOptions: {
+
+
+	// 			show: {
+
+
+	// 				resource: ['job'],
+
+
+	// 				operation: ['create'],
+
+
+	// 			},
+
+
+	// 		},
+
+
+	// 		description: 'Title of the job',
+
+
+	// 	},
+
+
+	// 	{
+
+
+	// 		displayName: 'Additional Fields',
+
+
+	// 		name: 'additionalFields',
+
+
+	// 		type: 'collection',
+
+
+	// 		placeholder: 'Add Field',
+
+
+	// 		default: {},
+
+
+	// 		displayOptions: {
+
+
+	// 			show: {
+
+
+	// 				resource: ['job'],
+
+
+	// 				operation: ['create'],
+
+
+	// 			},
+
+
+	// 		},
+
+
+	// 		options: [
+		// Write operations commented out - read-only mode
+
+
+	// 			{
+
+
+	// 				displayName: 'Instructions',
+
+
+	// 				name: 'instructions',
+
+
+	// 				type: 'string',
+
+
+	// 				typeOptions: {
+
+
+	// 					rows: 4,
+
+
+	// 				},
+
+
+	// 				default: '',
+
+
+	// 				description: 'Instructions for the job',
+
+
+	// 			},
+
+
+	// 			{
+
+
+	// 				displayName: 'Start Date',
+
+
+	// 				name: 'startAt',
+
+
+	// 				type: 'dateTime',
+
+
+	// 				default: '',
+
+
+	// 				description: 'When the job starts',
+
+
+	// 			},
+
+
+	// 			{
+
+
+	// 				displayName: 'End Date',
+
+
+	// 				name: 'endAt',
+
+
+	// 				type: 'dateTime',
+
+
+	// 				default: '',
+
+
+	// 				description: 'When the job ends',
+
+
+	// 			},
+
+
+	// 			{
+
+
+	// 				displayName: 'Property ID',
+
+
+	// 				name: 'propertyId',
+
+
+	// 				type: 'string',
+
+
+	// 				default: '',
+
+
+	// 				description: 'The property ID for this job',
+
+
+	// 			},
+
+
+	// 		],
+
+
+	// 	},
+
 	// ----------------------------------
-	{
-		displayName: 'Update Fields',
-		name: 'updateFields',
-		type: 'collection',
-		placeholder: 'Add Field',
-		default: {},
-		displayOptions: {
-			show: {
-				resource: ['job'],
-				operation: ['update'],
-			},
-		},
-		options: [
-			{
-				displayName: 'Title',
-				name: 'title',
-				type: 'string',
-				default: '',
-				description: 'Title of the job',
-			},
-			{
-				displayName: 'Instructions',
-				name: 'instructions',
-				type: 'string',
-				typeOptions: {
-					rows: 4,
-				},
-				default: '',
-				description: 'Instructions for the job',
-			},
-			{
-				displayName: 'Start Date',
-				name: 'startAt',
-				type: 'dateTime',
-				default: '',
-				description: 'When the job starts',
-			},
-			{
-				displayName: 'End Date',
-				name: 'endAt',
-				type: 'dateTime',
-				default: '',
-				description: 'When the job ends',
-			},
-		],
-	},
+
+
+	//         job: update (COMMENTED OUT - READ-ONLY MODE)
+
+
+	// ----------------------------------
+
+
+	// 	{
+
+
+	// 		displayName: 'Update Fields',
+
+
+	// 		name: 'updateFields',
+
+
+	// 		type: 'collection',
+
+
+	// 		placeholder: 'Add Field',
+
+
+	// 		default: {},
+
+
+	// 		displayOptions: {
+
+
+	// 			show: {
+
+
+	// 				resource: ['job'],
+
+
+	// 				operation: ['update'],
+
+
+	// 			},
+
+
+	// 		},
+
+
+	// 		options: [
+		// Write operations commented out - read-only mode
+
+
+	// 			{
+
+
+	// 				displayName: 'Title',
+
+
+	// 				name: 'title',
+
+
+	// 				type: 'string',
+
+
+	// 				default: '',
+
+
+	// 				description: 'Title of the job',
+
+
+	// 			},
+
+
+	// 			{
+
+
+	// 				displayName: 'Instructions',
+
+
+	// 				name: 'instructions',
+
+
+	// 				type: 'string',
+
+
+	// 				typeOptions: {
+
+
+	// 					rows: 4,
+
+
+	// 				},
+
+
+	// 				default: '',
+
+
+	// 				description: 'Instructions for the job',
+
+
+	// 			},
+
+
+	// 			{
+
+
+	// 				displayName: 'Start Date',
+
+
+	// 				name: 'startAt',
+
+
+	// 				type: 'dateTime',
+
+
+	// 				default: '',
+
+
+	// 				description: 'When the job starts',
+
+
+	// 			},
+
+
+	// 			{
+
+
+	// 				displayName: 'End Date',
+
+
+	// 				name: 'endAt',
+
+
+	// 				type: 'dateTime',
+
+
+	// 				default: '',
+
+
+	// 				description: 'When the job ends',
+
+
+	// 			},
+
+
+	// 		],
+
+
+	// 	},
 ];

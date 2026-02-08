@@ -5,3 +5,7 @@ dist/
 
 # Auto Claude data directory
 .auto-claude/
+
+# Claude Code settings and worktrees
+.claude_settings.json
+.worktrees/
