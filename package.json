@@ -1,6 +1,6 @@
 {
   "name": "@arisegroup/n8n-nodes-jobber",
-  "version": "0.1.0",
+  "version": "0.1.3",
   "description": "n8n community node for Jobber - field service management API integration",
   "keywords": [
     "n8n-community-node-package",
@@ -36,7 +36,8 @@
     ],
     "nodes": [
       "dist/nodes/Jobber/Jobber.node.js",
-      "dist/nodes/Jobber/JobberTrigger.node.js"
+      "dist/nodes/Jobber/JobberTrigger.node.js",
+      "dist/nodes/Jobber/JobberTool.node.js"
     ]
   },
   "devDependencies": {

@@ -7,7 +7,7 @@ import type {
 import { NodeApiError } from 'n8n-workflow';
 
 const JOBBER_API_URL = 'https://api.getjobber.com/api/graphql';
-const JOBBER_API_VERSION = '2023-11-15';
+const JOBBER_API_VERSION = '2025-04-16';
 
 export interface GraphQLResponse<T = IDataObject> {
 	data?: T;

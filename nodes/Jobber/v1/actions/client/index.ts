@@ -78,12 +78,12 @@ export async function executeClientOperation(
 
 		// Handle email if provided
 		if (additionalFields.email) {
-			input.emails = [{ description: 'main', address: additionalFields.email }];
+			input.emails = [{ description: 'MAIN', address: additionalFields.email }];
 		}
 
 		// Handle phone if provided
 		if (additionalFields.phone) {
-			input.phones = [{ description: 'main', number: additionalFields.phone }];
+			input.phones = [{ description: 'MAIN', number: additionalFields.phone }];
 		}
 
 		const query = `
