@@ -3,7 +3,11 @@ import type {
 	INodeExecutionData,
 	INodeType,
 	INodeTypeDescription,
+	ISupplyDataFunctions,
+	SupplyData,
 } from 'n8n-workflow';
+import { DynamicStructuredTool } from '@langchain/core/tools';
+import { z } from 'zod';
 
 export class JobberTool implements INodeType {
 	description: INodeTypeDescription = {
@@ -29,8 +33,8 @@ export class JobberTool implements INodeType {
 				],
 			},
 		},
-		inputs: ['main'],
-		outputs: ['main'],
+		inputs: [],
+		outputs: ['ai_tool'],
 		outputNames: ['ai_tool'],
 		credentials: [
 			{
@@ -118,5 +122,42 @@ export class JobberTool implements INodeType {
 		}
 
 		return [returnData];
+	}
+
+	async supplyData(this: ISupplyDataFunctions): Promise<SupplyData> {
+		const name = this.getNodeParameter('name', 0) as string;
+		const description = this.getNodeParameter('description', 0) as string;
+
+		const schema = z.object({
+			query: z.string().describe('GraphQL query to execute. CRITICAL: Object fields (phones, emails, addresses) MUST include sub-fields in curly braces. Example: query { clients(first: 10) { nodes { id name phones { number description primary } emails { address primary } } } }'),
+		});
+
+		const tool = new DynamicStructuredTool({
+			name,
+			description,
+			schema,
+			func: async (input) => {
+				const credentials = await this.getCredentials('jobberOAuth2Api') as any;
+
+				const response = await fetch('https://api.getjobber.com/api/graphql', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						'X-JOBBER-GRAPHQL-VERSION': '2025-04-16',
+						'Authorization': `Bearer ${credentials.oauthTokenData?.access_token || credentials.accessToken}`,
+					},
+					body: JSON.stringify({
+						query: input.query,
+					}),
+				});
+
+				const data = await response.json();
+				return JSON.stringify(data);
+			},
+		});
+
+		return {
+			response: tool,
+		};
 	}
 }
